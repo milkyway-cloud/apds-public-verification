@@ -1,0 +1,7 @@
+@import '@apds/core/styles.css';
+@import '@apds/core/fonts.css';
+body { margin: 0; background: var(--ap-theme-background-normal-normal); color: var(--ap-theme-label-normal); }
+main { max-width: var(--ap-platform-value-width-viewport-lg); margin: auto; padding: var(--ap-platform-value-spacing-xl); display: grid; gap: var(--ap-platform-value-spacing-xxl); }
+section { min-width: 0; padding: var(--ap-platform-value-spacing-md); border: 1px solid var(--ap-theme-line-solid-normal); border-radius: var(--ap-platform-value-rounded-md); }
+h1,h2,p { margin-block: var(--ap-platform-value-spacing-sm); }
+h1,h2 { font-weight: var(--ap-typography-font-weight-bold); }
