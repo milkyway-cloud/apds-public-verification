@@ -11,6 +11,11 @@
       "storybookUrl": "https://6af480f4707bf6dc8d662f39-tyaivbajdy.chromatic.com/",
       "mcpUrl": "https://6af480f4707bf6dc8d662f39-tyaivbajdy.chromatic.com/mcp",
       "integrity": "sha512-i4d2vzc4TxGkZ8fmJfwazoDeqbIJG1tyAjwPYCqA5QGUnWjEteMhqm922jkGoF6QUzKKi9HOfBQzsKqoA6MVdA=="
+    },
+    "0.2.1": {
+      "storybookUrl": "https://6af480f4707bf6dc8d662f39-dyilbzarnx.chromatic.com/",
+      "mcpUrl": "https://6af480f4707bf6dc8d662f39-dyilbzarnx.chromatic.com/mcp",
+      "integrity": "sha512-vPWL4oDmhyICBQ7VsvpsR4umdkKMN98nbiqXl1o93/DDN7B3lFf96G7roto6Jsy2yxr44wQnbC/0/kkGwA/etQ=="
     }
   }
 }

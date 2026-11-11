@@ -2,7 +2,7 @@ import {chromium, expect} from '@playwright/test';
 import fs from 'node:fs/promises';
 const browser = await chromium.launch({channel:'chrome',headless:true});
 const results=[];
-for (const [version,port] of [['0.1.3',6214],['0.2.0',6215]]) {
+for (const [version,port] of [['0.1.3',6214],['0.2.0',6215],['0.2.1',6216]]) {
  await fs.mkdir(`artifacts/${version}`,{recursive:true});
  const page=await browser.newPage({viewport:{width:1280,height:960}});
  const errors=[]; page.on('pageerror',e=>errors.push(e.message));

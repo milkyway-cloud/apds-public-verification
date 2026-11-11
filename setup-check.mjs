@@ -1,0 +1,32 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+const results=[];
+const run=(cwd,args)=>execFileSync('npx',['--yes','--package','@apds/core@0.2.1','apds-setup',...args],{cwd,encoding:'utf8',timeout:180000});
+for(const version of ['0.1.3','0.2.0','0.2.1']){
+ const cwd=path.resolve('apps',version);
+ const guide=path.join(cwd,'AGENTS.md');
+ const sentinel=`# Consumer app\nKeep existing app guidance. Installed APDS ${version}.\n`;
+ fs.writeFileSync(guide,sentinel);
+ fs.mkdirSync(path.join(cwd,'.codex'),{recursive:true});
+ const config=path.join(cwd,'.codex/config.toml');
+ const before='[mcp_servers.existing]\nurl = "https://example.com/mcp"\n';
+ fs.writeFileSync(config,before);
+ const preview=JSON.parse(run(cwd,['--mcp']));
+ assert.equal(preview.version,version);assert.equal(fs.readFileSync(config,'utf8'),before);
+ assert.equal(fs.readFileSync(guide,'utf8'),sentinel,'npx cache install must preserve consumer guidance');
+ const output=run(cwd,['--mcp','--apply',preview.planId]);
+ const updated=fs.readFileSync(config,'utf8');
+ assert.ok(updated.includes(before));assert.ok(updated.includes(preview.mcpUrl));
+ const repeat=JSON.parse(run(cwd,['--mcp']));assert.equal(repeat.changed,false);
+ const unchanged=run(cwd,['--mcp','--apply',repeat.planId]);
+ assert.equal(fs.readFileSync(config,'utf8'),updated);
+ assert.equal(fs.readFileSync(guide,'utf8'),sentinel);
+ const installed=JSON.parse(fs.readFileSync(path.join(cwd,'node_modules/@apds/core/package.json'),'utf8'));
+ assert.equal(installed.version,version,'helper must not upgrade the DS');
+ results.push({version,mcp:preview.mcpUrl,status:'passed',previewDidNotWrite:true,existingConfigPreserved:true,guidancePreserved:true,idempotent:true,output:output.trim(),repeat:unchanged.trim()});
+}
+fs.mkdirSync('artifacts',{recursive:true});
+fs.writeFileSync('artifacts/setup-results.json',JSON.stringify(results,null,2));
+console.log(JSON.stringify(results,null,2));

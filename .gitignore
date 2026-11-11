@@ -2,3 +2,8 @@
 **/dist/
 artifacts/
 *.log
+apps/*/.codex/
+apps/*/AGENTS.md
+apps/*/src/McpSaveButton.tsx
+apps/*/src/mcp-main.tsx
+apps/*/mcp.html

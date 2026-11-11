@@ -5,7 +5,7 @@ import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {StreamableHTTPClientTransport} from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 const registry=JSON.parse(await fs.readFile('releases.json','utf8'));
 const reports=[];
-for(const version of ['0.1.3','0.2.0']){
+for(const version of ['0.1.3','0.2.0','0.2.1']){
  const release=registry.releases[version];
  const target=path.resolve('apps',version);
  const installed=JSON.parse(await fs.readFile(path.join(target,'node_modules/@apds/core/package.json'),'utf8'));
