@@ -1,6 +1,6 @@
 import {chromium, expect} from '@playwright/test';
 import fs from 'node:fs/promises';
-const browser = await chromium.launch({headless:true});
+const browser = await chromium.launch({channel:'chrome',headless:true});
 const results=[];
 for (const [version,port] of [['0.1.3',6214],['0.2.0',6215]]) {
  await fs.mkdir(`artifacts/${version}`,{recursive:true});

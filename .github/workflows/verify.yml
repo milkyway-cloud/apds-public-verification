@@ -24,8 +24,8 @@ jobs:
         working-directory: apps/0.1.3
       - run: npm run typecheck && npm run build
         working-directory: apps/0.2.0
-      - run: npx playwright install --with-deps chromium
-        working-directory: apps/0.2.0
+      - name: Use the runner-provided Chrome
+        run: google-chrome --version
       - name: Verify browser behavior of the independent AI apps and remote examples
         run: |
           npm run dev -- --port 6214 > /tmp/apds-0.1.3.log 2>&1 &
